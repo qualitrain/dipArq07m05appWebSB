@@ -1,4 +1,4 @@
-package mx.com.qtx.dipArq07m05appWebSB.persistencia.jpa;
+package mx.com.qtx.dipArq07m05appWebSB.persistencia.jpa.reposManuales;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,8 +7,9 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import jakarta.persistence.EntityManager;
+import mx.com.qtx.dipArq07m05appWebSB.persistencia.jpa.entidades.Categoria;
 import mx.com.qtx.dipArq07m05appWebSB.servicios.IGestorDatosAltoNivel;
-import mx.com.qtx.dipArq07m05appWebSB.servicios.ProbadorCapaDatosJPA;
+import mx.com.qtx.dipArq07m05appWebSB.servicios.probadoresCapaDatos.ProbadorCapaDatosJPA;
 
 
 @Repository

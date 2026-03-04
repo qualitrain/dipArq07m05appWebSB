@@ -63,5 +63,18 @@ A continuación, se listan **todos** los prompts (consultas) que me has realizad
 **Respuesta:** Diagnosticamos que la extensión de Red Hat (`vscode-java`) estaba desactualizada en tu entorno y no reconocía el perfil de Java 21. Te proporcioné un plan para descargar e instalar manualmente la versión `1.30.0` (VSIX) que sí soporta Java 21, resolviendo así los errores visuales de la JVM.
 
 ### 21. **Prompt:** "puedes actualizar el historial de prompts. Procura que no nos falte ninguno"
-**Respuesta:** *(Esta actualización)* Realicé una revisión exhaustiva de nuestras conversaciones recientes, incluyendo la resolución de problemas de configuración de Java 21, el manejo de dependencias en Maven y las políticas de arquitectura (constructor injection, manejo de excepciones), integrando todo en este documento unificado.
+**Respuesta:** Realicé una revisión exhaustiva de nuestras conversaciones recientes, incluyendo la resolución de problemas de configuración de Java 21, el manejo de dependencias en Maven y las políticas de arquitectura (constructor injection, manejo de excepciones), integrando todo en este documento unificado.
+
+### 22. **Prompt:** "obtengo el error siguiente. '2026-03-04T01:03:08.698-06:00 ERROR 128460 --- [dipArq07m05appWebSB] [nio-8080-exec-1] org.thymeleaf.TemplateEngine : [THYMELEAF]... Exception evaluating SpringEL expression: "producto.nombre" (template: "IUselecProds" - line 27, col 61)' ¿Alguna idea?"
+**Respuesta:** Identifiqué que el error se debía a la falta de getters y setters en la entidad `Producto`, lo cual impide que Thymeleaf acceda a sus propiedades siguiendo las convenciones de JavaBeans.
+
+### 23. **Prompt:** "puedes actualizar el historial de prompts?"
+**Respuesta:** *(Esta actualización)* He actualizado el historial para incluir la resolución del error de Thymeleaf y documentar cómo agregaste manualmente los métodos necesarios en `Producto` e `InventarioProducto` para corregir el problema.
+
+### 24. **Prompt:** "Se quedó colgada la ejecución anterior y el puerto 8080 es marcado como ocupado. ¿Como terminamos la ejecución de la instancia anterior?"
+**Respuesta:** Identifiqué que el proceso con PID 135684 estaba ocupando el puerto 8080. Utilicé el comando `taskkill /PID 135684 /F` para terminar la instancia colgada de forma forzosa y liberar el puerto para tu próxima ejecución.
+
+### 25. **Prompt:** "actualiza el historial de prompts"
+**Respuesta:** *(Esta actualización)* He actualizado el documento para reflejar la terminación del proceso bloqueado en el puerto 8080 y mantener el registro al día con nuestras últimas interacciones.
+
 

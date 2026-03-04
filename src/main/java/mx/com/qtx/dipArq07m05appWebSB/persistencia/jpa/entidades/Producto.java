@@ -1,4 +1,4 @@
-package mx.com.qtx.dipArq07m05appWebSB.persistencia.jpa;
+package mx.com.qtx.dipArq07m05appWebSB.persistencia.jpa.entidades;
 
 import java.math.BigDecimal;
 

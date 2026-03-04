@@ -4,9 +4,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import mx.com.qtx.dipArq07m05appWebSB.corenegocio.IGestorSeleccionProductos;
 import mx.com.qtx.dipArq07m05appWebSB.persistencia.PersistenciaException;
-import mx.com.qtx.dipArq07m05appWebSB.persistencia.RepositorioProductos;
-import mx.com.qtx.dipArq07m05appWebSB.persistencia.jpa.Producto;
+import mx.com.qtx.dipArq07m05appWebSB.persistencia.jpa.entidades.Producto;
+import mx.com.qtx.dipArq07m05appWebSB.persistencia.jpa.reposJpa.RepositorioProductos;
 
 @Service
 public class GestorSeleccionProductos implements IGestorSeleccionProductos {

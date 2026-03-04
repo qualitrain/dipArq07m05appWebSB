@@ -9,8 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import mx.com.qtx.dipArq07m05appWebSB.persistencia.jpa.Producto;
-import mx.com.qtx.dipArq07m05appWebSB.servicios.IGestorSeleccionProductos;
+import mx.com.qtx.dipArq07m05appWebSB.corenegocio.IGestorSeleccionProductos;
+import mx.com.qtx.dipArq07m05appWebSB.persistencia.jpa.entidades.Producto;
 import mx.com.qtx.dipArq07m05appWebSB.servicios.ServiciosException;
 
 @Controller

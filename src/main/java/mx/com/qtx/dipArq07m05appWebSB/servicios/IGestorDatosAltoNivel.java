@@ -1,6 +1,6 @@
 package mx.com.qtx.dipArq07m05appWebSB.servicios;
 
-import mx.com.qtx.dipArq07m05appWebSB.persistencia.jpa.Categoria;
+import mx.com.qtx.dipArq07m05appWebSB.persistencia.jpa.entidades.Categoria;
 
 public interface IGestorDatosAltoNivel {
 
