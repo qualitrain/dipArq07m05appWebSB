@@ -1,0 +1,4 @@
+Políticas Generales:
+1. Manejo de errores: Habrá una excepción principal por cada capa: ServiciosException, PersistenciaException de las que heredarán las
+   excepciones propias de cada capa. Si una excepción tiene como causa una excepcion de una capa inferior, deberá ser anidada dentro de la excepción de mayor jerarquía
+2. En el caso de inyección de dependencias en Spring Framework, usar preferentemente la inyección en constructores con campos final

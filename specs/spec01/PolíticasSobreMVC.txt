@@ -1,0 +1,8 @@
+Políticas sobre MVC:
+1. Se usará el modelo de MVC interactivo de Spring Framework con Thymeleaf
+2. Los roles de controlador, servicio y repositorios estarán desacoplados a partir de usar Interfaces
+3. La implementación preferente para los repositorios será JPA Repositories de Spring
+4. Los roles de los paquetes usados estarán cada uno en su propia capa: web para controllers, servicios para servicios y persistencia para repositorios
+5. Manejo de errores: Habrá una excepción principal por cada capa: ServiciosException, PersistenciaException de las que heredarán las
+   excepciones propias de cada capa. Si una excepción tiene como causa una excepcion de una capa inferior, deberá ser anidada dentro de la excepción de mayor jerarquía
+6. Se deberán generar las vistas en HTML con Thymeleaf 
