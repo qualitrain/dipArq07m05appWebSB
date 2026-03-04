@@ -54,4 +54,14 @@ A continuación, se listan **todos** los prompts (consultas) que me has realizad
 **Respuesta:** Di alternativas manuales que detonan el trigger en Antigravity cuando la extensión está saturada. Sugerí forzar el "Reload" mediante un espacio en blanco y guardar el `pom.xml` (truco del guardado) o utilizando la interfaz gráfica "MAVEN" y dando click en Actualizar.
 
 ### 18. **Prompt:** "puedes actualizar el historial de prompts?"
-**Respuesta:** *(En proceso)* Acabo de actualizar este registro `historial_prompts.md`, condensando nuestros últimos diálogos generados sobre los errores de IDE, el refresco de Maven y la finalización estructural del plan V2 (paquete `web`).
+**Respuesta:** Acabo de actualizar este registro `historial_prompts.md`, condensando nuestros últimos diálogos generados sobre los errores de IDE, el refresco de Maven y la finalización estructural del plan V2 (paquete `web`).
+
+### 19. **Prompt:** "EN OTROS ides CUANDO SE RENOMBRE UN PAQUETE, automáticamente se cambian los nombres de paquete dentro de cada clase Java de ese paquuete. ¿Como se hace eso aquí?"
+**Respuesta:** Te expliqué que en Antigravity, al renombrar un paquete desde el explorador de archivos o mover una clase, el Language Support for Java detecta el cambio. Solo debes confirmar el refactor en la ventana emergente o usar `F2` sobre el nombre del paquete/clase para que se actualicen todas las referencias e importaciones automáticamente.
+
+### 20. **Prompt:** "Invalid runtime for JavaSE-21"
+**Respuesta:** Diagnosticamos que la extensión de Red Hat (`vscode-java`) estaba desactualizada en tu entorno y no reconocía el perfil de Java 21. Te proporcioné un plan para descargar e instalar manualmente la versión `1.30.0` (VSIX) que sí soporta Java 21, resolviendo así los errores visuales de la JVM.
+
+### 21. **Prompt:** "puedes actualizar el historial de prompts. Procura que no nos falte ninguno"
+**Respuesta:** *(Esta actualización)* Realicé una revisión exhaustiva de nuestras conversaciones recientes, incluyendo la resolución de problemas de configuración de Java 21, el manejo de dependencias en Maven y las políticas de arquitectura (constructor injection, manejo de excepciones), integrando todo en este documento unificado.
+
