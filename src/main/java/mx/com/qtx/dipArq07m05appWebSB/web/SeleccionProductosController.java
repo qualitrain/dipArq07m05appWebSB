@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import mx.com.qtx.dipArq07m05appWebSB.corenegocio.IGestorSeleccionProductos;
+import mx.com.qtx.dipArq07m05appWebSB.persistencia.jpa.entidades.Categoria;
 import mx.com.qtx.dipArq07m05appWebSB.persistencia.jpa.entidades.Producto;
 import mx.com.qtx.dipArq07m05appWebSB.servicios.ServiciosException;
 
@@ -23,6 +24,19 @@ public class SeleccionProductosController {
 
     public SeleccionProductosController(IGestorSeleccionProductos gestorProductos) {
         this.gestorProductos = gestorProductos;
+    }
+
+    @GetMapping("/MenuCategorias.html")
+    public String mostrarMenuInicio(Model model) {
+        try {
+            List<Categoria> categorias = gestorProductos.getCategorias();
+            model.addAttribute("categorias", categorias);
+            return "MenuCategorias";
+        } catch (ServiciosException e) {
+            logger.error("Error al cargar las categorías: {}", e.getMessage(), e);
+            model.addAttribute("error", "No se pudieron cargar las categorías.");
+            return "MenuCategorias";
+        }
     }
 
     @GetMapping("/categoria/{id}/productos")

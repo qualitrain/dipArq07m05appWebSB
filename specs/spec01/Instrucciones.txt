@@ -5,5 +5,5 @@
 4. Deseo que generes las vistas HTML con Thymeleaf y Bootstrap 5
 5. La narrativa del requerimiento a continuación:
 
-ID |	Nombre	| Como un (actor) |	Con la responsabilidad de…	|Quiero que..|	De modo que…
-1  |	Selección Productos y guardado en carrito de compra |	Cliente |	Elegir los productos que cubran sus necesidades	|El sistema me permita navegar entre artículos y buscarlos por funcionalidad, marca, costo, imagen y opiniones de otros clientes	|Pueda elegir los productos que mejor satisfagan mis necesidades
+ID |	Nombre                                           	| Como un (actor) |	Con la responsabilidad de…	                    |Quiero que..                                                                                                                       |	De modo que…
+1  |	Selección Productos y guardado en carrito de compra |	Cliente       |	Elegir los productos que cubran sus necesidades	|El sistema me permita navegar entre artículos y buscarlos por funcionalidad, marca, costo, imagen y opiniones de otros clientes	|Pueda elegir los productos que mejor satisfagan mis necesidades

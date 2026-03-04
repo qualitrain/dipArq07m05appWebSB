@@ -1,0 +1,7 @@
+Políticas sobre MVC:
+1. Se usará el modelo de MVC interactivo de Spring Security con Thymeleaf
+2. Los roles de controlador, servicio y repositorios estarán desacoplados a partir de usar Interfaces
+3. La implementación preferente para los repositorios será JPA Repositories de Spring
+4. Los roles estarán cada uno en su propia capa: web para controllers, servicios para servicios y persistencia para repositorios
+5. Se deberán generar las vistas en HTML con Thymeleaf 
+

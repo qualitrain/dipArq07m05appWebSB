@@ -1,0 +1,4 @@
+Correcciones y adiciones a lo hecho anteriormente:
+1. Hacer que MenuCategorias.html sea cargado con las categorías a partir de un servicio las categorías en vez de tenerlas alambradas
+2. Corregir: El controlador que debe generar MenuCategorias.html es src\main\java\mx\com\qtx\dipArq07m05appWebSB\web\SeleccionProductosController.java
+             y no MenuController.java (este último debe ser eliminado tras integrarse en SeleccionProductosController)

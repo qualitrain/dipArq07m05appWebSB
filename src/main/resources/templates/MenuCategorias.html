@@ -20,29 +20,10 @@
         </div>
 
         <div class="row justify-content-center">
-            <div class="col-md-4 mb-3">
-                <a th:href="@{/categoria/1/productos}" class="btn btn-outline-primary w-100 py-3 fs-5">
-                    Categoría 1 (Abarrotes)
-                </a>
-            </div>
-            <div class="col-md-4 mb-3">
-                <a th:href="@{/categoria/2/productos}" class="btn btn-outline-success w-100 py-3 fs-5">
-                    Categoría 2 (Limpieza)
-                </a>
-            </div>
-            <div class="col-md-4 mb-3">
-                <a th:href="@{/categoria/3/productos}" class="btn btn-outline-warning w-100 py-3 fs-5">
-                    Categoría 3 (Electrónicos)
-                </a>
-            </div>
-            <div class="col-md-4 mb-3">
-                <a th:href="@{/categoria/4/productos}" class="btn btn-outline-danger w-100 py-3 fs-5">
-                    Categoría 4 (Otros)
-                </a>
-            </div>
-            <div class="col-md-4 mb-3">
-                <a th:href="@{/categoria/5/productos}" class="btn btn-outline-dark w-100 py-3 fs-5">
-                    Categoría 5 (Especial)
+            <div th:each="cat : ${categorias}" class="col-md-4 mb-3">
+                <a th:href="@{/categoria/{id}/productos(id=${cat.id})}" class="btn btn-outline-primary w-100 py-3 fs-5"
+                    th:text="${cat.nombre + (cat.descripcion != null ? ' (' + cat.descripcion + ')' : '')}">
+                    Categoría
                 </a>
             </div>
         </div>
