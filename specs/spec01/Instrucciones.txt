@@ -1,0 +1,9 @@
+
+1. Deseo que trabajemos los requerimientos descritos en ManejoSesion.jpg de manera gradual
+2. El diagrama 1_1_SeleccionProducto.jpg describe cómo deben interactuar los componentes del MVC
+3. El diagrama 1_1_ClasesParticipantes.jpg describe clases Java nuevas a crear y una ya existente
+4. Deseo que generes las vistas HTML con Thymeleaf y Bootstrap 5
+5. La narrativa del requerimiento a continuación:
+
+ID |	Nombre	| Como un (actor) |	Con la responsabilidad de…	|Quiero que..|	De modo que…
+1  |	Selección Productos y guardado en carrito de compra |	Cliente |	Elegir los productos que cubran sus necesidades	|El sistema me permita navegar entre artículos y buscarlos por funcionalidad, marca, costo, imagen y opiniones de otros clientes	|Pueda elegir los productos que mejor satisfagan mis necesidades
