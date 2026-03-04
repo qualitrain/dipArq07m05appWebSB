@@ -2,7 +2,14 @@ package mx.com.qtx.dipArq07m05appWebSB.persistencia.jpa;
 
 import java.math.BigDecimal;
 
-import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "prd_producto")
@@ -28,7 +35,55 @@ public class Producto {
     @OneToOne(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
     private InventarioProducto inventario;
 
-	@Override
+	public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public BigDecimal getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(BigDecimal precio) {
+        this.precio = precio;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
+    public InventarioProducto getInventario() {
+        return inventario;
+    }
+
+    public void setInventario(InventarioProducto inventario) {
+        this.inventario = inventario;
+    }
+
+    @Override
 	public String toString() {
 		return "Producto [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", precio=" + precio
 				+ ", categoria=" + categoria.getId() + ", inventario=" + inventario + ", getClass()=" + getClass()
