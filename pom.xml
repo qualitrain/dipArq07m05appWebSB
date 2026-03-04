@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>mx.com.qtx</groupId>
-	<artifactId>dipArq07m03explorCapaPer-1</artifactId>
+	<artifactId>dipArq07m05appWebSB</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>dipArq07m03explorCapaPer-1</name>
-	<description>Explorar patrones de capa de datos</description>
+	<name>dipArq07m05appWebSB</name>
+	<description>Probar Arq Web</description>
 	<url/>
 	<licenses>
 		<license/>
