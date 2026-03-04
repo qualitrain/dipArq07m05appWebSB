@@ -1,0 +1,24 @@
+Ajustes:
+1. Deseo que en el despliegue de categorías se remplace el uso de buttons por otro tipo de
+componente de Bootstrap 5. Usar el siguiente ejemplo, como base:
+
+<div class="row">
+  <div class="col-sm-6 mb-3 mb-sm-0">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Nombre categoría 1</h5>
+        <p class="card-text">Descripción categoría 1</p>
+        <a href="link a categoria/{id categoria 1}/productos " class="btn btn-primary">Ir </a>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Nombre categoría 2</h5>
+        <p class="card-text">Descripción categoría 1</p>
+        <a href="link a categoria/{id categoria 1}/productos " class="btn btn-primary">Ir</a>
+      </div>
+    </div>
+  </div>
+</div>

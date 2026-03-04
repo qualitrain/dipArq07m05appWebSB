@@ -80,4 +80,13 @@ A continuación, se listan **todos** los prompts (consultas) que me has realizad
 ### 26. **Prompt:** "He hecho adciones a la carpeta specs. Quiero que trabajemos en el grupo de cambios escritos en la carpeta spec02. Requiero que revises las carpetas mencionadas para hablar del nuevo requerimiento y validar la propuesta"
 **Respuesta:** Implementé el requerimiento `spec02` dinamizando el menú de categorías. Creé el `RepositorioCategorias`, actualicé el `GestorSeleccionProductos` y centralicé la navegación en `SeleccionProductosController`. También eliminé `MenuController.java` y sistematicé la vista `MenuCategorias.html` con Thymeleaf. Guardé una copia del plan en la carpeta `spec02` según lo solicitado.
 
+### 27. **Prompt:** "En spec02 he agragegao un archivo Ajustes01.txt. Revisa si puedes planear el ajuste solicitado. Si es así, genera el plan, si no, haz las preguntas que requieras"
+**Respuesta:** Rediseñé el menú de categorías utilizando el componente `card` de Bootstrap 5, siguiendo el ejemplo propuesto en `Ajustes01.txt`. Ahora cada categoría se muestra en una tarjeta con su nombre, descripción y un botón dedicado para navegar a sus productos.
 
+### 28. **Prompt:** "HE agregado un nuevo ajuste solicitado en spec02/Ajustes02.txt. Revisa y genera el plan de implementación"
+**Respuesta:** Ajusté la lógica de obtención de categorías en el backend para que se presenten en orden alfabético por nombre en el menú. Para ello, agregué un método de consulta derivada (`findAllByOrderByNombreAsc`) en el repositorio y actualicé el gestor de servicios.
+### 29. **Prompt:** "En spec02 he agregado un archivo Ajustes03.txt. Revisa y genera el plan de implementación"
+**Respuesta:** Se propone añadir método JPQL `findAllWithProducts` en `RepositorioCategorias`, actualizar `GestorSeleccionProductos` para usarlo, y mantener orden alfabético. El plan incluye modificar el repositorio, el servicio y compilar sin errores.
+
+### 30. **Prompt:** "Procede con el plan"
+**Respuesta:** Se añadió método JPQL `findAllWithProducts` en `RepositorioCategorias`, se actualizó `GestorSeleccionProductos` para usarlo, y se compiló el proyecto sin errores.

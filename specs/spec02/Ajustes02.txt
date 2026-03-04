@@ -1,0 +1,1 @@
+1. Presenta en MenuCategorias.html las categorías ordenadas alfabéticamente por su nombre.

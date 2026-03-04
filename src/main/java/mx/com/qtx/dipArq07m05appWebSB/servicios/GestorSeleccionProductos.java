@@ -35,7 +35,7 @@ public class GestorSeleccionProductos implements IGestorSeleccionProductos {
     @Override
     public List<Categoria> getCategorias() {
         try {
-            return repoCategorias.findAll();
+            return repoCategorias.findAllWithProducts();
         } catch (Exception e) {
             PersistenciaException persistenciaEx = new PersistenciaException("Error al acceder a los datos de categorías.", e);
             throw new ServiciosException("Fallo en el servicio de obtención de categorías.", persistenciaEx);

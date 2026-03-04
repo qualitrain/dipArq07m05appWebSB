@@ -1,0 +1,2 @@
+¿Qué cambios tendríamos que hacer para que en MenuCategorias.html no se desplegaran 
+las categorías sin artículos?

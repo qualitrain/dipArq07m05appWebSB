@@ -19,12 +19,15 @@
             Ocurrió un error.
         </div>
 
-        <div class="row justify-content-center">
-            <div th:each="cat : ${categorias}" class="col-md-4 mb-3">
-                <a th:href="@{/categoria/{id}/productos(id=${cat.id})}" class="btn btn-outline-primary w-100 py-3 fs-5"
-                    th:text="${cat.nombre + (cat.descripcion != null ? ' (' + cat.descripcion + ')' : '')}">
-                    Categoría
-                </a>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            <div th:each="cat : ${categorias}" class="col">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${cat.nombre}">Nombre Categoría</h5>
+                        <p class="card-text text-muted" th:text="${cat.descripcion}">Descripción de la categoría.</p>
+                        <a th:href="@{/categoria/{id}/productos(id=${cat.id})}" class="btn btn-primary">Ir</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
