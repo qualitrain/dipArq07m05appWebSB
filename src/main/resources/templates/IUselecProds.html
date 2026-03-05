@@ -12,7 +12,12 @@
 <body class="bg-light">
 
     <div class="container mt-5">
-        <h1 class="text-center mb-4">Productos Disponibles</h1>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1>Productos Disponibles</h1>
+            <a th:href="@{/carrito}" class="btn btn-outline-primary">
+                <i class="bi bi-cart"></i> Ver Carrito
+            </a>
+        </div>
 
         <div class="row">
 
@@ -30,8 +35,16 @@
 
                         <div class="mt-auto">
                             <h4 class="text-success mb-3">$<span th:text="${producto.precio}">0.00</span></h4>
-                            <!-- Acción simulada para la etapa 1.5 del caso de uso -->
-                            <button class="btn btn-primary w-100">Añadir al carrito</button>
+                            <!-- Acción para añadir al carrito -->
+                            <form th:action="@{/carrito/agregar}" method="post">
+                                <input type="hidden" name="idProducto" th:value="${producto.id}">
+                                <div class="input-group mb-2">
+                                    <span class="input-group-text">Cant.</span>
+                                    <input type="number" name="cantidad" value="1" min="1"
+                                        class="form-control text-center">
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100">Añadir al carrito</button>
+                            </form>
                         </div>
                     </div>
                 </div>

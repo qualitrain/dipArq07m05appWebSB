@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Carrito de Compras</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Carrito de Compras</h1>
+
+        <div th:if="${#lists.isEmpty(carrito.elementos)}" class="text-center">
+            <div class="alert alert-info">Tu carrito está vacío.</div>
+            <a th:href="@{/MenuCategorias.html}" class="btn btn-primary">Continuar Comprando</a>
+        </div>
+
+        <div th:if="${not #lists.isEmpty(carrito.elementos)}">
+            <table class="table table-striped align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Producto</th>
+                        <th>Precio</th>
+                        <th>Cantidad</th>
+                        <th>Subtotal</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="item : ${carrito.elementos}">
+                        <td th:text="${item.producto.nombre}">Nombre</td>
+                        <td th:text="'$' + ${item.producto.precio}">$0.00</td>
+                        <td th:text="${item.cantidad}">1</td>
+                        <td th:text="'$' + ${#numbers.formatDecimal(item.subtotal, 1, 2)}">$0.00</td>
+                        <td>
+                            <form th:action="@{/carrito/eliminar/{id}(id=${item.producto.id})}" method="post">
+                                <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr class="table-secondary fw-bold">
+                        <td colspan="3" class="text-end">Total:</td>
+                        <td th:text="'$' + ${#numbers.formatDecimal(carrito.total, 1, 2)}">$0.00</td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
+
+            <div class="d-flex justify-content-between mt-4">
+                <form th:action="@{/carrito/vaciar}" method="post">
+                    <button type="submit" class="btn btn-warning">Vaciar Carrito</button>
+                </form>
+                <div>
+                    <a th:href="@{/MenuCategorias.html}" class="btn btn-secondary me-2">Seguir Comprando</a>
+                    <button class="btn btn-success">Finalizar Compra</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
