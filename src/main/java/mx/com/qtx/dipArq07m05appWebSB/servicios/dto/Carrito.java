@@ -7,7 +7,7 @@ import java.util.Optional;
 import mx.com.qtx.dipArq07m05appWebSB.persistencia.jpa.entidades.Producto;
 
 public class Carrito {
-    private List<ElementoCarrito> elementos = new ArrayList<>();
+    private final List<ElementoCarrito> elementos = new ArrayList<>();
 
     public void agregarProducto(Producto producto, int cantidad) {
         Optional<ElementoCarrito> elementoExistente = elementos.stream()

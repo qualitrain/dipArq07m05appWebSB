@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Component;
 
 import mx.com.qtx.dipArq07m05appWebSB.servicios.IGestorDatos;
 import mx.com.qtx.dipArq07m05appWebSB.servicios.dto.CategoriaDTO;
@@ -14,7 +13,7 @@ import mx.com.qtx.dipArq07m05appWebSB.servicios.dto.CategoriaProductoDTO;
 
 //@Component
 public class ProbadorCapaDatos implements CommandLineRunner{
-	private static Logger log = LoggerFactory.getLogger(ProbadorCapaDatos.class);
+	private static final Logger log = LoggerFactory.getLogger(ProbadorCapaDatos.class);
 	
 	@Autowired
 	IGestorDatos gestorDatos;

@@ -1,0 +1,13 @@
+1. Agrega filtros y listeners que me permitan monitorear, por medio del log
+en modo debug:
+a. El contenido del request
+b. El contenido de la respuesta
+c. El tiempo que tarda en procesarse la peticion
+d. El tiempo que tarda en procesarse la respuesta
+e. El tiempo que tarda en procesarse la peticion y la respuesta
+
+2. Agrega un listener que me permita monitorear, por medio del log en modo debug:
+componentes web cargados en el contexto de la aplicacion
+
+3. Propón otros componentes que consideres necesarios para mejorar la aplicacion
+   a nivel monitoreo y logueo.  

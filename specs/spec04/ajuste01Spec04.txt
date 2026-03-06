@@ -1,0 +1,3 @@
+Deseo que agregues un listener web que despliegue, en el log bajo nivel debug y al terminar la inicialización 
+del contexto web, los servlets y filtros registrados en este y de ser posible, el orden que ocupan
+en la cadena de procesamiento de peticiones 

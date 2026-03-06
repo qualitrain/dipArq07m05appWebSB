@@ -26,8 +26,9 @@ public class GestorVentasDAO implements IGestorDatos {
 	@Autowired
 	DataSource ds;
 	
-	private static Logger log = LoggerFactory.getLogger(GestorVentasDAO.class);
+	private static final Logger log = LoggerFactory.getLogger(GestorVentasDAO.class);
 	
+	@Override
 	public CategoriaDTO leerCategoriaXID(int id) throws SQLException {
 		
 		String sqlConsulta = "SELECT cat_id_categoria, cat_nombre, cat_descripcion "
@@ -51,6 +52,7 @@ public class GestorVentasDAO implements IGestorDatos {
 		return null;
 	}
 	
+	@Override
 	public List<CategoriaProductoDTO> leerProductosConCategorias(int id) throws SQLException{
 		List<CategoriaProductoDTO> lstCatsYprods = new ArrayList<>();
 		String sqlConsulta = "SELECT cat_id_categoria, cat_nombre, cat_descripcion, "
@@ -123,7 +125,7 @@ public class GestorVentasDAO implements IGestorDatos {
 	            }
 	        }
 	    }
-	    //TODO Mejorar estartegia de manejo de error ¿Que pasa si hay un error originado por otra causa?
+	    //TODO Mejorar estrategia de manejo de error ¿Que pasa si hay un error originado por otra causa?
 	    throw new SQLException("No se pudo generar el id de la categoría");
 	}
 	

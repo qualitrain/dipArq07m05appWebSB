@@ -9,12 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 import jakarta.persistence.EntityManager;
 import mx.com.qtx.dipArq07m05appWebSB.persistencia.jpa.entidades.Categoria;
 import mx.com.qtx.dipArq07m05appWebSB.servicios.IGestorDatosAltoNivel;
-import mx.com.qtx.dipArq07m05appWebSB.servicios.probadoresCapaDatos.ProbadorCapaDatosJPA;
 
 
 @Repository
 public class GestorVentasJPAmanual implements IGestorDatosAltoNivel {
-	private static Logger log = LoggerFactory.getLogger(GestorVentasJPAmanual.class);
+	private static final Logger log = LoggerFactory.getLogger(GestorVentasJPAmanual.class);
 	
 	@Autowired
 	EntityManager em;

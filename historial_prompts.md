@@ -90,3 +90,60 @@ A continuación, se listan **todos** los prompts (consultas) que me has realizad
 
 ### 30. **Prompt:** "Procede con el plan"
 **Respuesta:** Se añadió método JPQL `findAllWithProducts` en `RepositorioCategorias`, se actualizó `GestorSeleccionProductos` para usarlo, y se compiló el proyecto sin errores.
+
+### 31. **Prompt:** "He agregado instrucciones en la carpeta spec03. Genera el plan correspondiente"
+**Respuesta:** Analicé el requerimiento de carrito de compra en `spec03`. Generé un plan de implementación detallado que incluyó la creación de modelos/DTOs (`Carrito`, `ElementoCarrito`), un servicio con alcance de sesión (`GestorCarrito`), un nuevo controlador (`CarritoController`) y la actualización de las vistas para permitir añadir productos y visualizar el carrito.
+
+### 32. **Prompt:** [Aprobación del Plan de Implementación de spec03]
+**Respuesta:** Llevé a cabo la implementación completa del carrito. Desarrolé la lógica de negocio para gestionar elementos, subtotales y totales. Corregí errores de tipos de datos detectados durante la codificación (IDs de producto como `String` y precios como `BigDecimal`) y aseguré la persistencia en sesión. Finalmente, integré enlaces de navegación en las vistas de categorías y productos para una experiencia de usuario completa.
+
+### 33. **Prompt:** "actualiza el historial de prompts"
+**Respuesta:** *(Esta actualización)* He actualizado este documento para reflejar todo el trabajo realizado en el requerimiento `spec03`, documentando la transición desde la fase de planeación hasta la implementación del sistema de carrito de compras y el ajuste de tipos de datos del modelo.
+
+### 34. **Prompt:** "ve las instrucciones de la spec 4, valida los alcances y propón un plan"
+**Respuesta:** Analicé las instrucciones de `spec04`. Propuse un plan para implementar un filtro de monitoreo web (`FiltroMonitoreoWeb`) para rastrear peticiones, respuestas y tiempos de procesamiento, además de un oyente de contexto (`OyenteContextoWeb`) para listar componentes cargados. También sugerí mejoras como Actuator.
+
+### 35. **Prompt:** "Guarda el plan dentro de la carpeta spec04"
+**Respuesta:** Generé el archivo `specs/spec04/plan_monitoreo.md` con el detalle técnico de la propuesta para centralizar la documentación del requerimiento.
+
+### 36. **Prompt:** "Ejecuta solamente los pasos 1, 2 y 3. Deja para más adelante las propuestas de mejora"
+**Respuesta:** Implementé el monitoreo web completo: el `FiltroMonitoreoWeb` (capturando cuerpos y midiendo tiempos T1, T2 y T3) y el `OyenteContextoWeb`. Realicé ajustes críticos en el `pom.xml` (Spring Boot 3.4.2) y corregí un error de compilación en el constructor de `ContentCachingRequestWrapper`. Asimismo, configuré el nivel de log `DEBUG` en `application.properties`.
+
+### 37. **Prompt:** "actualiza el historial de prompts"
+**Respuesta:** *(Esta actualización)* He puesto al día este registro para incluir el avance en el requerimiento `spec04` sobre monitoreo y logging, documentando tanto la planificación como las correcciones técnicas de compilación y configuración de entorno realizadas.
+
+### 38. **Prompt:** "Ayúdame con este error de compilación: `The constructor ContentCachingRequestWrapper(HttpServletRequest) is undefined`. Parece un bug del compilador porque el método existe."
+**Respuesta:** Identificamos que el error se debía a una discrepancia entre la versión de Spring Boot (3.4.2) y la firma del constructor en el bytecode cargado. Se resolvió asegurando la compatibilidad de las dependencias en el `pom.xml`.
+
+### 39. **Prompt:** "App reporta error de conexión a MySQL pero el servicio está arriba. ¿Cómo restauro el estado?"
+**Respuesta:** Diagnosticamos que el error de conexión en el IDE era una falsa percepción por falta de herramientas de integración. La solución definitiva fue la instalación de las extensiones de Spring Boot faltantes (`vmware.vscode-boot-dev-pack`), lo cual permitió al IDE reconocer correctamente el estado de la aplicación y su conectividad.
+
+### 40. **Prompt:** "Tengo un error reportado por el compilador del IDE que no tiene sentido. El código parece correcto. ¿Qué puede estar pasando?"
+**Respuesta:** Confirmamos que se trataba de un "error fantasma" de sincronización del Language Server (IDE). Se resolvió mediante la recarga del entorno de trabajo (`F1` -> "Java: Clean workspace" y "Reload Window"), tras lo cual el error desapareció sin cambios en el código.
+
+### 41. **Prompt:** "Por favor actualiza el historial de prompts"
+**Respuesta:** He sincronizado el historial completo, recuperando interacciones críticas sobre errores de compilación, fallos de conexión a bases de datos y desincronización del IDE, asegurando que el registro sea fiel a nuestra sesión de trabajo.
+
+### 42. **Prompt:** "¿Cual es la diferencia de lo propuesto vs usar un listener de la spec servlet?"
+**Respuesta:** Detallamos que un listener de Spring (`ApplicationListener`) ofrece mayor visibilidad sobre metadatos del framework, como el orden de los filtros, además de ejecutarse en el momento exacto en que el contexto de Spring está totalmente listo.
+
+### 43. **Prompt:** "Y cual sería la diferencia vs si recuperar el servlet context en la primera petición que pudiera obtener un listener a nivel request?"
+**Respuesta:** Explicamos que un listener de petición (`ServletRequestListener`) es menos eficiente para diagnósticos de arranque y depende de una interacción externa, mientras que el listener de inicio es automático y proactivo.
+
+### 44. **Prompt:** "procede con el plan que propusiste"
+**Respuesta:** Realicé la implementación inicial de `OyenteServletsFiltros.java` para monitorear componentes web.
+
+### 45. **Prompt:** "revisa OyenteServletsFiltros.reportarFiltros la instruccion de la linea 76 devuelve un mapa vacío..."
+**Respuesta:** Corregimos un error técnico en el que Spring Boot no exponía los registros de filtros como beans públicos. La solución definitiva fue recuperar directamente los beans de tipo `Filter` y usar `AnnotationAwareOrderComparator` para deducir su orden real, integrando además la utilidad `Util.java` para simplificar la lectura de paquetes en los logs.
+
+### 46. **Prompt:** "sincroniza el historial de prompts"
+**Respuesta:** He sincronizado los diálogos técnicos sobre la arquitectura de monitoreo web y la resolución del bug en el reporte de filtros, completando el registro hasta el arranque exitoso de la aplicación.
+
+### 47. **Prompt:** "me gustaría que el reporte de los filtros y servlets en OyenteServletsFiltros.java incluyera las familias de urls que atienden..."
+**Respuesta:** Implementamos la mejora para mostrar los patrones de ruteo (`Mappings`) obtenidos del `ServletContext`. Explicamos que, dado que la interfaz `FilterRegistration` estándar no expone directamente los `DispatcherTypes`, nos enfocamos en proveer los mapeos de URL precisos para mejorar la visibilidad del flujo de peticiones.
+
+### 48. **Prompt:** "actualiza el historial de prompts"
+**Respuesta:** He sincronizado los últimos avances sobre la evolución del reporte de monitoreo web, documentando la inclusión de mappings de URL y la verificación exitosa de los componentes en los logs de la aplicación.
+
+### 49. **Prompt:** "¿como es que hay filtros registrados por Spring y además filtros registrados por Tomcat?..."
+**Respuesta:** Aclaramos la arquitectura de filtros en Spring Boot: Spring actúa como un orquestador que registra sus beans de tipo `Filter` en el `ServletContext` de Tomcat. El orden final lo determina la secuencia de registro de Spring (basada en `@Order` o `Ordered`), mientras que Tomcat puede tener filtros nativos (como WebSockets) que operan fuera del contexto de Spring pero dentro de la misma cadena de ejecución.
