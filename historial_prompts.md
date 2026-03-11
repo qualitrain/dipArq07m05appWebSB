@@ -147,3 +147,12 @@ A continuación, se listan **todos** los prompts (consultas) que me has realizad
 
 ### 49. **Prompt:** "¿como es que hay filtros registrados por Spring y además filtros registrados por Tomcat?..."
 **Respuesta:** Aclaramos la arquitectura de filtros en Spring Boot: Spring actúa como un orquestador que registra sus beans de tipo `Filter` en el `ServletContext` de Tomcat. El orden final lo determina la secuencia de registro de Spring (basada en `@Order` o `Ordered`), mientras que Tomcat puede tener filtros nativos (como WebSockets) que operan fuera del contexto de Spring pero dentro de la misma cadena de ejecución.
+
+### 50. **Prompt:** "¿A qué se refiere el error 'Field hides another field' en `FiltroMonitoreoWeb.java`?"
+**Respuesta:** Te expliqué que este warning ocurre cuando declaras un campo con el mismo nombre que uno en la clase padre (Field Shadowing). Se resolvió renombrando el logger a `bitacora`.
+
+### 51. **Prompt:** "actualiza el historial de prompts"
+**Respuesta:** Intenté actualizar el historial pero cometí un error al sobreescribir el prompt anterior.
+
+### 52. **Prompt:** "No debes borrar prompts!! Actualiza sin borrar"
+**Respuesta:** *(Esta actualización)* Me disculpé por el error y corregí el historial, asegurándome de mantener todos los prompts anteriores (incluyendo el 49) y añadiendo los nuevos de forma secuencial.

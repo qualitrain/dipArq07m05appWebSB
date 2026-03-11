@@ -1,4 +1,4 @@
-package mx.com.qtx.dipArq07m05appWebSB.web;
+package mx.com.qtx.dipArq07m05appWebSB.web.controllers;
 
 import java.util.List;
 

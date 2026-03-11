@@ -1,4 +1,4 @@
-package mx.com.qtx.dipArq07m05appWebSB.web;
+package mx.com.qtx.dipArq07m05appWebSB.web.monitoreo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,10 +30,22 @@ public class OyenteServletsFiltros implements ApplicationListener<ContextRefresh
         }
 
         ApplicationContext context = event.getApplicationContext();
-        
+
+        // Solo procedemos si es el contexto raiz
+        if (context.getParent() != null) {
+            logger.debug("Contexto padre: " + context.getParent().getDisplayName());
+            return;
+        }
+        else{
+            logger.debug("Contexto raiz: " + context.getDisplayName());
+        }
         // Solo procedemos si es un contexto web
         if (!(context instanceof WebApplicationContext)) {
+            logger.debug("Contexto no es web: " + context.getDisplayName());
             return;
+        }
+        else{
+            logger.debug("Contexto ES web: " + context.getDisplayName());
         }
 
         WebApplicationContext webContext = (WebApplicationContext) context;
@@ -61,6 +73,7 @@ public class OyenteServletsFiltros implements ApplicationListener<ContextRefresh
         servlets.forEach((nombre, registro) -> {
             logger.debug(String.format("Servlet: %-25s -> Clase: %s", nombre, registro.getClassName()));
             logger.debug(String.format("   Mappings: %s", registro.getMappings()));
+
             Map<String, String> initParams = registro.getInitParameters();
             if(!initParams.isEmpty()){
                 logger.debug("   Parametros init: " + initParams);

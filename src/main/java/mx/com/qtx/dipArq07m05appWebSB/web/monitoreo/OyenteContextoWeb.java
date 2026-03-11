@@ -1,4 +1,4 @@
-package mx.com.qtx.dipArq07m05appWebSB.web;
+package mx.com.qtx.dipArq07m05appWebSB.web.monitoreo;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,14 +38,14 @@ public class OyenteContextoWeb implements ApplicationListener<ContextRefreshedEv
         ConfigurableListableBeanFactory factory =
                         (ConfigurableListableBeanFactory) context.getAutowireCapableBeanFactory();
 
-        Map<String,List<String>> mapClaseVsBeans = new TreeMap<>();
-        
+                        
         logger.debug("==========================================================================");
         logger.debug("MONITOREO DE COMPONENTES CARGADOS EN EL CONTEXTO:");
-        
+                        
         String[] allBeanNames = context.getBeanDefinitionNames();
         Arrays.sort(allBeanNames);
-        
+                        
+        Map<String,List<String>> mapClaseVsBeans = new TreeMap<>();
         for (String nombreBeanI : allBeanNames) {
             Class<?> beanClass = obtenerClase(nombreBeanI, factory);
             String nomClaseBean = obtenerNombreClase(nombreBeanI, factory);
@@ -60,7 +60,7 @@ public class OyenteContextoWeb implements ApplicationListener<ContextRefreshedEv
             }
         } 
         logger.debug("Beans de cada tipo:" + "-".repeat(50));
-        mapClaseVsBeans.forEach((k,v)->logger.debug(k + ": " + v.toString()));
+        mapClaseVsBeans.forEach((claseI,lstBeans)->logger.debug(claseI + ": " + lstBeans.toString()));
         logger.debug("==========================================================================");
     }
 
