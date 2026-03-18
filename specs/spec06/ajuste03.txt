@@ -1,0 +1,7 @@
+1. El logo no se distingue en el navbar. Ajusta el código para que se vea el logo en el navbar. El problema
+es que el logo es transparente y se pierde con el fondo. 
+2. Los títulos son muy grandes. Ajusta el código para que los títulos sean más pequeños. 
+3. El nombre Qualitrain en el footer tiene una tipografía demasiado gruesa. Eso le da un aspecto infantil. Afínalo
+para que se vea más profesional.
+4. El footer es muy grande. Ajusta el código para que el footer sea más pequeño. 
+5. Usa el lema "Profesores extraordinarios, estudiantes extraordinarios" en el footer. 

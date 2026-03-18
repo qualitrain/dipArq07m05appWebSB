@@ -1,0 +1,6 @@
+1. El logo se sigue perdiendo. No se distingue en el navbar. Al ser transparente se pierde con el fondo. Es necesario 
+que tenga un fondo blanco o un borde blanco para que se distinga. 
+2. En la pagina de monitoreo es necesario que se agregue un boton para navegar a la pagina que muestra las peticiones 
+que se han realizado al servidor. 
+3. Los títulos principales siguen siendo muy grandes. 
+4. El footer sigue siendo demasiado grande. Tiene demasiado espacio entre lineas. 

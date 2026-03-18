@@ -1,0 +1,7 @@
+Se ve infantil! Se usan tamaños exagerados en los títulos. La tipografía usada en tablas es burda. 
+Si el logo ya dice Qualitrain, no tiene sentido que vuelva a aparecer en la barra de menú de nuevo, cuando 
+ni siquiera se distingue. No repitas el logo en el footer. Usa un diseño limpio y corporativo.
+El dominio de qualitrain es qualitrain.com.mx
+LA direccion es Av. Patriotismo 878 Col. Mixcoac, CDMX, C.P. 03910
+Teléfono: 55 5511 8121
+Correo: [acruz@qualitrain.com.mx]

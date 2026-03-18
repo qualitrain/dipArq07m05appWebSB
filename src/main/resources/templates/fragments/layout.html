@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+    <!-- NAVBAR FRAGMENT -->
+    <nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark mb-4 shadow-sm">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" th:href="@{/MenuCategorias.html}">
+                <div class="logo-box me-2">
+                    <img th:src="@{/images/logoQtx.png}" alt="Qualitrain Logo" height="40">
+                </div>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/MenuCategorias.html}">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/MenuCategorias.html}">Productos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/carrito}">Carrito</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/monitoreo/componentes}">Monitoreo</a>
+                    </li>
+                </ul>
+                <span class="navbar-text">
+                    <a href="#" class="btn btn-outline-danger btn-sm">Salir</a>
+                </span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- FOOTER FRAGMENT -->
+    <footer th:fragment="footer" class="footer-corporativo pt-3 pb-2 mt-4">
+        <div class="container text-center text-md-start">
+            <div class="row text-center text-md-start">
+                <div class="col-md-5 col-lg-4 col-xl-4 mx-auto mt-3">
+                    <h5 class="text-uppercase mb-4 font-weight-normal"
+                        style="font-weight: 400 !important; letter-spacing: 1px;">Qualitrain</h5>
+                    <p>Profesores extraordinarios, estudiantes extraordinarios</p>
+                </div>
+
+                <div class="col-md-6 col-lg-5 col-xl-5 mx-auto mt-3">
+                    <h5 class="text-uppercase mb-4 font-weight-bold">Contacto</h5>
+                    <p>
+                        <i class="bi bi-house-door-fill me-3"></i> Av. Patriotismo 878 Col. Mixcoac, CDMX, C.P. 03910
+                    </p>
+                    <p>
+                        <i class="bi bi-envelope-fill me-3"></i> acruz@qualitrain.com.mx
+                    </p>
+                    <p>
+                        <i class="bi bi-telephone-fill me-3"></i> 55 5511 8121
+                    </p>
+                    <p>
+                        <i class="bi bi-globe me-3"></i> <a href="https://qualitrain.com.mx/" target="_blank"
+                            class="text-decoration-none">qualitrain.com.mx</a>
+                    </p>
+                </div>
+            </div>
+            <hr class="mb-4" style="border-color: hsl(210, 20%, 40%);">
+            <div class="row align-items-center">
+                <div class="col-md-12 text-center">
+                    <p class="mb-0"> Copyright © 2026 Todos los derechos reservados por:
+                        <strong style="color: hsl(0, 0%, 100%);">Qtx de México, S.A de C.V.</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

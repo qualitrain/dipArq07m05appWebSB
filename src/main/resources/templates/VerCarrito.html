@@ -6,9 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Carrito de Compras</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
 </head>
 
 <body class="bg-light">
+
+    <!-- Fragment Navbar -->
+    <div th:replace="~{fragments/layout :: navbar}"></div>
 
     <div class="container mt-5">
         <h1 class="text-center mb-4">Carrito de Compras</h1>
@@ -19,8 +23,8 @@
         </div>
 
         <div th:if="${not #lists.isEmpty(carrito.elementos)}">
-            <table class="table table-striped align-middle">
-                <thead class="table-dark">
+            <table class="table table-corporativa align-middle">
+                <thead>
                     <tr>
                         <th>Producto</th>
                         <th>Precio</th>
@@ -43,7 +47,7 @@
                     </tr>
                 </tbody>
                 <tfoot>
-                    <tr class="table-secondary fw-bold">
+                    <tr class="fw-bold" style="background-color: hsl(210, 20%, 96%);">
                         <td colspan="3" class="text-end">Total:</td>
                         <td th:text="'$' + ${#numbers.formatDecimal(carrito.total, 1, 2)}">$0.00</td>
                         <td></td>
@@ -63,6 +67,11 @@
         </div>
     </div>
 
+    <!-- Fragment Footer -->
+    <div th:replace="~{fragments/layout :: footer}"></div>
+
+    <!-- Scripts JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

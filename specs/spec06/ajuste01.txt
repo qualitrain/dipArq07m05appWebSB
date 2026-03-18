@@ -1,0 +1,3 @@
+La estructura está bien, pero no se distingue el logo en el navbar (se pierde por la elección de colores). 
+Ajusta el código para que se distinga el logo en el navbar. El look & feel se ve infantil. Debe verse corporativo
+y los colores usados así como la tipografía deben ser profesionales.

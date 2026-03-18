@@ -1,0 +1,138 @@
+/* 
+  Estilos Corporativos - Qualitrain
+  ---------------------------------
+*/
+
+:root {
+    /* Paleta Corporativa usando HSL según políticas */
+    --brand-dark: hsl(216, 65%, 11%);
+    --brand-primary: hsl(215, 50%, 18%);
+    --brand-accent: hsl(166, 100%, 70%);
+    --brand-text: hsl(214, 100%, 95%);
+
+    --corp-blue: hsl(216, 70%, 20%);
+    --corp-light: hsl(210, 20%, 98%);
+    --corp-text: hsl(210, 10%, 30%);
+    --corp-border: hsl(210, 15%, 85%);
+}
+
+body {
+    font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: var(--corp-text);
+    background-color: var(--corp-light);
+}
+
+/* Títulos más limpios y no infantiles */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+    color: var(--corp-blue);
+    font-weight: 500;
+}
+
+h1 {
+    font-size: 1.25rem;
+}
+
+h2 {
+    font-size: 1.15rem;
+}
+
+h3 {
+    font-size: 1.05rem;
+}
+
+h4 {
+    font-size: 1.0rem;
+}
+
+h5 {
+    font-size: 0.9rem;
+}
+
+/* Navbar */
+.navbar.navbar-corporativa {
+    background-color: var(--brand-dark) !important;
+    border-bottom: 1px solid var(--corp-blue);
+}
+
+.navbar-corporativa .nav-link {
+    color: hsl(214, 20%, 80%) !important;
+    font-weight: 400;
+    transition: color 0.3s;
+    font-size: 0.95rem;
+}
+
+.navbar-corporativa .nav-link:hover,
+.navbar-corporativa .nav-link.active {
+    color: hsl(0, 0%, 100%) !important;
+}
+
+.logo-box {
+    background-color: hsl(0, 0%, 100%);
+    padding: 5px 10px;
+    border-radius: 6px;
+}
+
+/* Tablas corporativas limpias */
+.table-corporativa {
+    background-color: hsl(0, 0%, 100%);
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    box-shadow: 0 1px 3px hsla(0, 0%, 0%, 0.05);
+    border: 1px solid var(--corp-border);
+}
+
+.table-corporativa th {
+    background-color: hsl(210, 20%, 96%) !important;
+    color: var(--corp-blue) !important;
+    font-weight: 600;
+    border-bottom: 2px solid var(--corp-border);
+    padding: 12px 15px;
+}
+
+.table-corporativa td {
+    border-bottom: 1px solid var(--corp-border);
+    padding: 10px 15px;
+    color: var(--corp-text);
+}
+
+/* Elementos Bootstrap overrides */
+.card {
+    border: 1px solid var(--corp-border);
+    box-shadow: 0 1px 3px hsla(0, 0%, 0%, 0.05);
+}
+
+/* Footer Corporativo */
+.footer-corporativo {
+    background-color: var(--corp-blue) !important;
+    color: hsl(0, 0%, 100%) !important;
+    font-size: 0.9rem;
+}
+
+.footer-corporativo h5 {
+    color: hsl(0, 0%, 100%) !important;
+    font-size: 1.05rem;
+    margin-bottom: 1rem;
+    letter-spacing: 0.5px;
+}
+
+.footer-corporativo p {
+    color: hsl(210, 20%, 80%) !important;
+    margin-bottom: 0.2rem;
+    font-size: 0.85rem;
+    line-height: 1.2;
+}
+
+.footer-corporativo a {
+    color: hsl(210, 20%, 80%) !important;
+    text-decoration: none;
+}
+
+.footer-corporativo a:hover {
+    color: hsl(0, 0%, 100%) !important;
+}
