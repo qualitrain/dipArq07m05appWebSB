@@ -1,0 +1,14 @@
+1.  GET http://localhost:8080/api/v1/productos devuelve el error:
+    "error_critico": "Mensaje interno: Could not write JSON: Document nesting depth (501) exceeds the maximum allowed 
+    (500, from `StreamWriteConstraints.getMaxNestingDepth()`)"
+
+    ¿A qué se debe este error?
+    
+    Este error se debe a una **recursión infinita** durante la serialización a JSON. 
+    Específicamente, existe una relación bidireccional entre las entidades `Producto` e `InventarioProducto`:
+    - `Producto` tiene una referencia a `InventarioProducto`.
+    - `InventarioProducto` tiene una referencia de vuelta a `Producto`.
+
+    Como ninguna de estas referencias está marcada con `@JsonIgnore` (o anotaciones similares como `@JsonBackReference`), Jackson intenta serializar el producto, luego su inventario, luego el producto de ese inventario, y así sucesivamente hasta alcanzar el límite permitido.
+    
+    .

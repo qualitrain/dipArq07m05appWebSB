@@ -10,6 +10,8 @@ import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "inv_inventario_producto")
 public class InventarioProducto {
@@ -18,6 +20,7 @@ public class InventarioProducto {
     @Column(name = "inv_id_producto", length = 50)
     private String id;
 
+    @JsonIgnore
     @MapsId
     @OneToOne(optional = false)
     @JoinColumn(name = "inv_id_producto", nullable = false)

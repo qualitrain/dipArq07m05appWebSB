@@ -1,0 +1,21 @@
+    1. En el método:
+    
+    @GetMapping("/categoria/{idCategoria}")
+    public ResponseEntity<List<Producto>> getProductosPorCategoria(@PathVariable int idCategoria) {
+        List<Producto> listado = gestor.getProductosXcat(idCategoria);
+        return new ResponseEntity<>(listado, HttpStatus.OK);
+    }
+
+    Se debe cambiar la forma de pasar el parámetro idCategoria. Ahora se pasa como parámetro de path, 
+    pero debería pasarse como parámetro de query.
+
+    2. Requerimos soportar el método GET para obtener todos los productos, sin importar la categoría.
+    El método debería ser:
+    @GetMapping
+    public ResponseEntity<List<Producto>> getProductos() {
+        List<Producto> listado = gestor.getProductos();
+        return new ResponseEntity<>(listado, HttpStatus.OK);
+    }
+    
+    
+    

@@ -1,0 +1,7 @@
+GET /api/v1/categorias
+Devuelve:
+{
+  "error_critico": "Mensaje interno: Could not write JSON: Cannot lazily initialize collection of role 'mx.com.qtx.dipArq07m05appWebSB.persistencia.jpa.entidades.Categoria.productos' with key '1' (no session)"
+}
+Ya anoté el método con @Transactional(readOnly = true) en GestorProductos.java el método getCategorias().
+¿Que otra cosa puede ser el origen del error?

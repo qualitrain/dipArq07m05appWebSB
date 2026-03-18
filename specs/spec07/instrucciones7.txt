@@ -1,0 +1,11 @@
+Requerimos agregar un API Rest para :
+Agregar, eliminar y modificar categorías y productos.
+Consideraciones:
+1. Los controladores rest deben ir en el paquete mx.com.qtx.dipArq07m05appWebSB.webapi
+1.a. Se debe agregar un controlador rest para las categorías
+1.b. Se debe agregar un controlador rest para los productos
+1.c. Se deben agregar validaciones en los controladores rest
+2. Se deben agregar los métodos necesarios en el servicio GestorSeleccionProductos.java que debera renombrarse a 
+GestorProductos.java
+3. Se deben proponer mejores prácticas para la implementación de los controladores rest
+4. Consultarme para cualquier duda. 

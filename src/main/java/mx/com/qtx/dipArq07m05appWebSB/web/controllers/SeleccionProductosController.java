@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import mx.com.qtx.dipArq07m05appWebSB.corenegocio.IGestorSeleccionProductos;
+import mx.com.qtx.dipArq07m05appWebSB.corenegocio.IGestorProductos;
 import mx.com.qtx.dipArq07m05appWebSB.persistencia.jpa.entidades.Categoria;
 import mx.com.qtx.dipArq07m05appWebSB.persistencia.jpa.entidades.Producto;
 import mx.com.qtx.dipArq07m05appWebSB.servicios.ServiciosException;
@@ -20,9 +20,9 @@ public class SeleccionProductosController {
     private static final Logger logger = LoggerFactory.getLogger(SeleccionProductosController.class);
     
     // Inyección por constructor
-    private final IGestorSeleccionProductos gestorProductos;
+    private final IGestorProductos gestorProductos;
 
-    public SeleccionProductosController(IGestorSeleccionProductos gestorProductos) {
+    public SeleccionProductosController(IGestorProductos gestorProductos) {
         this.gestorProductos = gestorProductos;
     }
 
