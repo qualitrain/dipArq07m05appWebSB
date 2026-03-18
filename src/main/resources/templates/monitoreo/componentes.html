@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Monitoreo - Componentes Web</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Panel de Monitoreo</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="/monitoreo/peticiones">Últimas Peticiones</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/monitoreo/componentes">Componentes Web</a>
+                </li>
+            </ul>
+            <span class="navbar-text">
+                <a href="/MenuCategorias.html" class="btn btn-outline-light btn-sm">Volver a la App</a>
+            </span>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-4">
+    <div class="row">
+        
+        <!-- Columna de Servlets -->
+        <div class="col-lg-12 mb-5">
+            <h2 class="mb-3 text-primary">Servlets Registrados</h2>
+            <div class="card shadow-sm">
+                <div class="card-body p-0">
+                    <table class="table table-hover table-bordered mb-0">
+                        <thead class="table-primary">
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Clase</th>
+                                <th>Mappings (URL Patterns)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:if="${servlets.empty}">
+                                <td colspan="3" class="text-center py-3 text-muted">No se encontraron Servlets</td>
+                            </tr>
+                            <tr th:each="servlet : ${servlets}">
+                                <td th:text="${servlet.nombre}" class="fw-bold">Nombre</td>
+                                <td th:text="${servlet.clase}">Clase</td>
+                                <td><code th:text="${servlet.mappings}"></code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Columna de Filtros -->
+        <div class="col-lg-12">
+            <h2 class="mb-3 text-success">Filtros Registrados (Orden de Ejecución)</h2>
+            <div class="alert alert-info">
+                Los filtros se ejecutan en el orden listado a continuación. Los filtros registrados externamente al contexto de Spring (SC) pueden no tener un orden garantizado definido aquí.
+            </div>
+            
+            <div class="card shadow-sm">
+                <div class="card-body p-0">
+                    <table class="table table-hover table-bordered mb-0">
+                        <thead class="table-success">
+                            <tr>
+                                <th style="width: 80px;">Orden</th>
+                                <th>Nombre del Filtro</th>
+                                <th>Tipo / Origen</th>
+                                <th>Clase</th>
+                                <th>Mappings (URL Patterns)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:if="${filtros.empty}">
+                                <td colspan="5" class="text-center py-3 text-muted">No se encontraron Filtros</td>
+                            </tr>
+                            <tr th:each="filtro : ${filtros}">
+                                <td class="text-center fw-bold" th:text="${filtro.orden > 0 ? filtro.orden : '-'}">1</td>
+                                <td th:text="${filtro.nombre}" class="fw-bold">Nombre</td>
+                                <td>
+                                    <span class="badge" 
+                                          th:classappend="${filtro.tipo == 'Filtro Spring' ? 'bg-success' : 'bg-warning text-dark'}"
+                                          th:text="${filtro.tipo}">Tipo</span>
+                                </td>
+                                <td th:text="${filtro.clase}">Clase</td>
+                                <td><code th:text="${filtro.mappings}"></code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -156,3 +156,27 @@ A continuación, se listan **todos** los prompts (consultas) que me has realizad
 
 ### 52. **Prompt:** "No debes borrar prompts!! Actualiza sin borrar"
 **Respuesta:** *(Esta actualización)* Me disculpé por el error y corregí el historial, asegurándome de mantener todos los prompts anteriores (incluyendo el 49) y añadiendo los nuevos de forma secuencial.
+
+### 53. **Prompt:** "Explain what this problem is and help me fix it: Missing mandatory Classpath entries. Resolve Project Problems."
+**Respuesta:** Te expliqué que era una desincronización de caché (el Java Language Server de tu IDE VS Code perdiendo la vista del `pom.xml`). Confirmé que el código estaba bien compilando con Maven y te proporcioné las instrucciones (Ej: "Java: Clean Workspace") para forzar al IDE a refrescar sus rutas.
+
+### 54. **Prompt:** "revisa la carpeta spec05. Contiene las instrucciones del siguiente plan que debes generar. Pregunta lo que requieras y genera el plan"
+**Respuesta:** Revisé el concepto de visualizador web de monitoreo. Para no escribir directo a disco o reduntar logs en el controlador, te propuse una arquitectura limpia con un Servicio In-Memory concurrente (`ServicioMonitoreo`) que actuara como repositorio temporal entre los Filtros/Listeners y el nuevo Controller/Thymeleaf.
+
+### 55. **Prompt:** "cambia el segmento del nombre del paquete de "modelo" a "dtos" (Sobre el plan propuesto)"
+**Respuesta:** Ajusté el plan a tu estándar de arquitectura (`dtos` en lugar de `modelo`) e implementé todo el marco completo: Los modelos `PeticionWebInfo` / `ComponenteWebInfo`, el `MonitoreoController`, la lógica en los Listeners para popularlos y las dos vistas HTML `peticiones` y `componentes` con modales en JS.
+
+### 56. **Prompt:** "Guarda el plan en spec05 en formato md"
+**Respuesta:** Tomé el `implementation_plan.md` aprobado sobre el panel de monitoreo y realicé una copia en la ruta definitiva `specs/spec05/plan_monitoreo_web.md`.
+
+### 57. **Prompt:** "actualiza el historial de prompts"
+**Respuesta:** *(Esta actualización)* He refrescado nuestro documento para constatar los últimos requerimientos funcionales (`spec05` - Panel Web de Monitoreo) y las sesiones de resolución de sincronía IDE/Maven.
+
+### 58. **Prompt:** "Genera un resumen sobre la estructura de la aplicacion en formato md y agrégalo al proyecto. Actualiza tambien el historial de prompts con esto último"
+**Respuesta:** *(Esta actualización)* Ejecuté un análisis del árbol de directorios y generé inicialmentre `estructura_proyecto.md`. 
+
+### 59. **Prompt:** "El paquete de monitoreo debería ser autocontenido, pueso que puede usarse en otros proyectos. Genera un paquete controllers dentro de él. Mueve el controller de monitoro ahí y revisa que todo quede bien."
+**Respuesta:** Siguiendo las buenas prácticas arquitectónicas, creé el paquete `web.monitoreo.controllers` y moví `MonitoreoController.java` ahí, adaptando la importación de sus dependencias y verificando que el proyecto compilara exitosamente con Maven.
+
+### 60. **Prompt:** "Genera la estructura del proyecto en formato md y un resumen descriptivo. Así mismo actualiza el historial e prompts"
+**Respuesta:** *(Esta actualización)* Volví a ejecutar el comando de análisis del árbol (`tree`) debido a que el archivo `.md` previo fue descartado. Generé un nuevo archivo `estructura_proyecto.md` que incluye la actualización del componente autocontenido de Monitoreo y actualicé esta misma bitácora.

@@ -20,7 +20,10 @@ public class FiltroMonitoreoWeb extends OncePerRequestFilter {
 
     private static final Logger bitacora = LoggerFactory.getLogger(FiltroMonitoreoWeb.class);
 
-    public FiltroMonitoreoWeb() {
+    private final ServicioMonitoreo servicioMonitoreo;
+
+    public FiltroMonitoreoWeb(ServicioMonitoreo servicioMonitoreo) {
+        this.servicioMonitoreo = servicioMonitoreo;
         bitacora.info("FiltroMonitoreoWeb constructor");
     }
 
@@ -86,5 +89,22 @@ public class FiltroMonitoreoWeb extends OncePerRequestFilter {
         bitacora.debug("b. Tiempo procesar respuesta (T3-T2): {} ms", (t3 - t2) / 1_000_000.0);
         bitacora.debug("c. Tiempo ciclo completo (T3-T1): {} ms", (t3 - t1) / 1_000_000.0);
         bitacora.debug("==========================================================================");
+
+        // Almacenar en memoria para la vista Web
+        String reqBodyStr = new String(reqBody, StandardCharsets.UTF_8);
+        String resBodyStr = new String(respBody, StandardCharsets.UTF_8);
+        
+        // Truncar para prevenir OutOfMemoryException
+        if (reqBodyStr.length() > 4096) reqBodyStr = reqBodyStr.substring(0, 4096) + "... (Truncated)";
+        if (resBodyStr.length() > 4096) resBodyStr = resBodyStr.substring(0, 4096) + "... (Truncated)";
+
+        mx.com.qtx.dipArq07m05appWebSB.web.monitoreo.dtos.PeticionWebInfo info = 
+            new mx.com.qtx.dipArq07m05appWebSB.web.monitoreo.dtos.PeticionWebInfo(
+                method, path, reqBodyStr, status, resBodyStr,
+                (t2 - t1) / 1_000_000.0,
+                (t3 - t2) / 1_000_000.0,
+                (t3 - t1) / 1_000_000.0
+            );
+        servicioMonitoreo.registrarPeticion(info);
     }
 }

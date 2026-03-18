@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Monitoreo - Peticiones Web</title>
+    <!-- CSS Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .table-responsive { max-height: 80vh; overflow-y: auto; }
+        .truncate { max-width: 150px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        pre { background-color: #f8f9fa; padding: 10px; border-radius: 5px; font-size: 0.85em; }
+    </style>
+</head>
+<body class="bg-light">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Panel de Monitoreo</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/monitoreo/peticiones">Últimas Peticiones</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/monitoreo/componentes">Componentes Web</a>
+                </li>
+            </ul>
+            <span class="navbar-text">
+                <a href="/MenuCategorias.html" class="btn btn-outline-light btn-sm">Volver a la App</a>
+            </span>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <h2 class="mb-4">Últimas Peticiones Recibidas</h2>
+    
+    <div class="card shadow-sm">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover table-striped mb-0">
+                    <thead class="table-dark sticky-top">
+                        <tr>
+                            <th>Método</th>
+                            <th>Ruta</th>
+                            <th>Estado</th>
+                            <th>Tiempo Ciclo (ms)</th>
+                            <th>T. Petición (ms)</th>
+                            <th>T. Respuesta (ms)</th>
+                            <th>Detalles</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:if="${peticiones.empty}">
+                            <td colspan="7" class="text-center py-4 text-muted">No hay peticiones registradas aún.</td>
+                        </tr>
+                        <tr th:each="pet, iterStat : ${peticiones}">
+                            <td>
+                                <span class="badge" 
+                                      th:classappend="${pet.method == 'GET' ? 'bg-primary' : (pet.method == 'POST' ? 'bg-success' : 'bg-secondary')}"
+                                      th:text="${pet.method}">GET</span>
+                            </td>
+                            <td th:text="${pet.path}">/ruta</td>
+                            <td>
+                                <span class="badge"
+                                      th:classappend="${pet.status >= 200 && pet.status < 300 ? 'bg-success' : (pet.status >= 400 ? 'bg-danger' : 'bg-warning')}"
+                                      th:text="${pet.status}">200</span>
+                            </td>
+                            <td th:text="${#numbers.formatDecimal(pet.tCicloCompleto, 1, 2)}">0.00</td>
+                            <td th:text="${#numbers.formatDecimal(pet.tProcesoPeticion, 1, 2)}">0.00</td>
+                            <td th:text="${#numbers.formatDecimal(pet.tProcesoRespuesta, 1, 2)}">0.00</td>
+                            <td>
+                                <!-- Botón para abrir modal con detalles -->
+                                <button type="button" class="btn btn-sm btn-outline-info" 
+                                        data-bs-toggle="modal" th:data-bs-target="'#modalPet' + ${iterStat.index}">
+                                    Ver Cuerpos
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" th:id="'modalPet' + ${iterStat.index}" tabindex="-1" aria-hidden="true">
+                                    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+                                        <div class="modal-content">
+                                            <div class="modal-header bg-dark text-white">
+                                                <h5 class="modal-title">
+                                                    <span th:text="${pet.method}"></span> <span th:text="${pet.path}"></span>
+                                                </h5>
+                                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <h6>Cuerpo de la Petición (Request)</h6>
+                                                        <pre th:text="${#strings.isEmpty(pet.reqBody) ? '(Vacío)' : pet.reqBody}"></pre>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <h6>Cuerpo de la Respuesta (Response)</h6>
+                                                        <pre th:text="${#strings.isEmpty(pet.resBody) ? '(Vacío)' : pet.resBody}"></pre>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

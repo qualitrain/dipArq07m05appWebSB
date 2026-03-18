@@ -16,12 +16,19 @@ import org.springframework.web.context.WebApplicationContext;
 import jakarta.servlet.FilterRegistration;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletRegistration;
+import mx.com.qtx.dipArq07m05appWebSB.web.monitoreo.dtos.ComponenteWebInfo;
 import mx.com.qtx.dipArq07m05appWebSB.web.util.Util;
 
 @Component
 public class OyenteServletsFiltros implements ApplicationListener<ContextRefreshedEvent> {
 
     private static final Logger logger = LoggerFactory.getLogger(OyenteServletsFiltros.class);
+
+    private final ServicioMonitoreo servicioMonitoreo;
+
+    public OyenteServletsFiltros(ServicioMonitoreo servicioMonitoreo) {
+        this.servicioMonitoreo = servicioMonitoreo;
+    }
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -56,6 +63,8 @@ public class OyenteServletsFiltros implements ApplicationListener<ContextRefresh
             return;
         }
 
+        servicioMonitoreo.limpiarComponentesWeb();
+
         logger.debug("==========================================================================");
         logger.debug("MONITOREO DE COMPONENTES WEB (SERVLETS Y FILTROS):");
 
@@ -78,6 +87,11 @@ public class OyenteServletsFiltros implements ApplicationListener<ContextRefresh
             if(!initParams.isEmpty()){
                 logger.debug("   Parametros init: " + initParams);
             }
+            
+            servicioMonitoreo.agregarServlet(
+                new ComponenteWebInfo(nombre, registro.getClassName(), 
+                                      registro.getMappings().toString(), 1, "Servlet")
+            );
         });
     }
 
@@ -105,6 +119,10 @@ public class OyenteServletsFiltros implements ApplicationListener<ContextRefresh
 
                 logger.debug(String.format("Posición: %2d | Bean: %-25s -> Clase: %s", (i + 1), beanName, className));
                 logger.debug(String.format("            Mappings: %s", mappings));
+
+                servicioMonitoreo.agregarFiltro(
+                    new ComponenteWebInfo(beanName, className, mappings, (i + 1), "Filtro Spring")
+                );
             }
         }
 
@@ -114,6 +132,11 @@ public class OyenteServletsFiltros implements ApplicationListener<ContextRefresh
             if(!esBean){
                logger.debug(String.format("Filtro SC: %-25s -> Clase: %s", name, Util.recortarNombreClase(reg.getClassName())));
                logger.debug(String.format("            Mappings: %s", reg.getUrlPatternMappings()));
+
+               servicioMonitoreo.agregarFiltro(
+                    new ComponenteWebInfo(name, Util.recortarNombreClase(reg.getClassName()), 
+                                          reg.getUrlPatternMappings().toString(), 0, "Filtro Externo SC")
+               );
             }
         });
     }
