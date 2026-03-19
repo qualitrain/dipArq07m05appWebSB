@@ -1,0 +1,3 @@
+HE agregado la dependencia de springdoc-openapi-starter-webmvc-ui en el pom.xml. Al consultar la URL http://localhost:8080/v3/api-docs 
+se obtiene un error de "Failed to load API definition." Fetch error: response status is 500 /v3/api-docs
+
