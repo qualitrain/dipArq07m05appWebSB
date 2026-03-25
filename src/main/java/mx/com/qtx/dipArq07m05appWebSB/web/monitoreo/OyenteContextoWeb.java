@@ -26,7 +26,8 @@ import mx.com.qtx.dipArq07m05appWebSB.web.util.Util;
 public class OyenteContextoWeb implements ApplicationListener<ContextRefreshedEvent> {
 
     private static final Logger logger = LoggerFactory.getLogger(OyenteContextoWeb.class);
-    private static final boolean REPORTAR_TODOS_LOS_BEANS = true;
+    private static final boolean REPORTAR_TODOS_LOS_BEANS = false;
+    private static final boolean REPORTAR_BEANS_DE_CADA_TIPO = false;
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -59,8 +60,10 @@ public class OyenteContextoWeb implements ApplicationListener<ContextRefreshedEv
                 mapClaseVsBeans.put(Util.recortarNombreClase(nombreBeanI),beansXclase);
             }
         } 
-        logger.debug("Beans de cada tipo:" + "-".repeat(50));
-        mapClaseVsBeans.forEach((claseI,lstBeans)->logger.debug(claseI + ": " + lstBeans.toString()));
+        if(REPORTAR_BEANS_DE_CADA_TIPO) {
+            logger.debug("Beans de cada tipo:" + "-".repeat(50));
+            mapClaseVsBeans.forEach((claseI,lstBeans)->logger.debug(claseI + ": " + lstBeans.toString()));
+        }
         logger.debug("==========================================================================");
     }
 
@@ -99,12 +102,12 @@ public class OyenteContextoWeb implements ApplicationListener<ContextRefreshedEv
         if (REPORTAR_TODOS_LOS_BEANS) {
             return true;
         }
-        if (clazz != null) {
-            return isWebComponent(clazz) || 
-                isRepository(clazz) ||
-                esDelGrupoMaven(clazz);
+        if(clazz == null) {
+            return false;
         }
-        return true;
+        return isWebComponent(clazz) || 
+            isRepository(clazz) ||
+            esDelGrupoMaven(clazz);
     }
 
     private boolean esDelGrupoMaven(Class<?> clazz) {
