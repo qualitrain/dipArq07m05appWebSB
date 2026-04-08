@@ -26,7 +26,6 @@ public class SeleccionProductosController {
         this.gestorProductos = gestorProductos;
     }
 
-
     @GetMapping({"/", "/MenuCategorias.html"})
     public String mostrarMenuInicio(Model model) {
         try {
