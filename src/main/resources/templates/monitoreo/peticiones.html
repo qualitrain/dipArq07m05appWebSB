@@ -44,6 +44,7 @@
                         <thead class="sticky-top">
                             <tr>
                                 <th>Método</th>
+                                <th>Usuario</th>
                                 <th>Ruta</th>
                                 <th>Estado</th>
                                 <th>Tiempo Ciclo (ms)</th>
@@ -54,7 +55,7 @@
                         </thead>
                         <tbody>
                             <tr th:if="${peticiones.empty}">
-                                <td colspan="7" class="text-center py-4 text-muted">No hay peticiones registradas aún.
+                                <td colspan="8" class="text-center py-4 text-muted">No hay peticiones registradas aún.
                                 </td>
                             </tr>
                             <tr th:each="pet, iterStat : ${peticiones}">
@@ -63,6 +64,7 @@
                                         th:classappend="${pet.method == 'GET' ? 'bg-primary' : (pet.method == 'POST' ? 'bg-success' : 'bg-secondary')}"
                                         th:text="${pet.method}">GET</span>
                                 </td>
+                                <td th:text="${pet.usuario}">Anónimo</td>
                                 <td th:text="${pet.path}">/ruta</td>
                                 <td>
                                     <span class="badge"

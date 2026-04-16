@@ -5,7 +5,8 @@ import java.nio.charset.StandardCharsets;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.util.ContentCachingRequestWrapper;
 import org.springframework.web.util.ContentCachingResponseWrapper;
@@ -15,7 +16,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@Component
+
 public class FiltroMonitoreoWeb extends OncePerRequestFilter {
 
     private static final Logger bitacora = LoggerFactory.getLogger(FiltroMonitoreoWeb.class);
@@ -69,9 +70,12 @@ public class FiltroMonitoreoWeb extends OncePerRequestFilter {
         String path = request.getRequestURI();
         String method = request.getMethod();
         int status = response.getStatus();
+        
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String usuario = (auth != null && auth.isAuthenticated()) ? auth.getName() : "Anónimo";
 
         bitacora.debug("==========================================================================");
-        bitacora.debug("MONITOREO WEB - Petición: {} {}", method, path);
+        bitacora.debug("MONITOREO WEB - Petición: {} {} - USUARIO: {}", method, path, usuario);
         bitacora.debug("Cuerpo Petición: {}", new String(reqBody, StandardCharsets.UTF_8));
         bitacora.debug("--------------------------------------------------------------------------");
         bitacora.debug("Estado Respuesta: {}", status);
@@ -103,7 +107,8 @@ public class FiltroMonitoreoWeb extends OncePerRequestFilter {
                 method, path, reqBodyStr, status, resBodyStr,
                 (t2 - t1) / 1_000_000.0,
                 (t3 - t2) / 1_000_000.0,
-                (t3 - t1) / 1_000_000.0
+                (t3 - t1) / 1_000_000.0,
+                usuario
             );
         servicioMonitoreo.registrarPeticion(info);
     }

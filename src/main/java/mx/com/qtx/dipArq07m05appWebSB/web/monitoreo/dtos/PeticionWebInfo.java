@@ -9,9 +9,10 @@ public class PeticionWebInfo {
     private double tCicloCompleto;
     private double tProcesoPeticion;
     private double tProcesoRespuesta;
+    private String usuario;
 
     public PeticionWebInfo(String method, String path, String reqBody, int status, String resBody, 
-                           double tProcesoPeticion, double tProcesoRespuesta, double tCicloCompleto) {
+                           double tProcesoPeticion, double tProcesoRespuesta, double tCicloCompleto, String usuario) {
         this.method = method;
         this.path = path;
         this.reqBody = reqBody;
@@ -20,6 +21,7 @@ public class PeticionWebInfo {
         this.tProcesoPeticion = tProcesoPeticion;
         this.tProcesoRespuesta = tProcesoRespuesta;
         this.tCicloCompleto = tCicloCompleto;
+        this.usuario = usuario;
     }
 
     public String getMethod() {
@@ -84,5 +86,13 @@ public class PeticionWebInfo {
 
     public void settCicloCompleto(double tCicloCompleto) {
         this.tCicloCompleto = tCicloCompleto;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 }
