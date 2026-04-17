@@ -7,7 +7,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class PasswordUtileria implements CommandLineRunner{
     public static String encodePassword(String password) {
  //       return new BCryptPasswordEncoder().encode(password);
