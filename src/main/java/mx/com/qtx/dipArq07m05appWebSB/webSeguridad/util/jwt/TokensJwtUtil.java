@@ -2,7 +2,10 @@ package mx.com.qtx.dipArq07m05appWebSB.webSeguridad.util.jwt;
 
 import java.security.Key;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.UUID;
+
+import javax.crypto.SecretKey;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +16,9 @@ import java.util.Map;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.Jws;
+import io.jsonwebtoken.JwtBuilder;
 
 @Component
 public class TokensJwtUtil implements CommandLineRunner {
@@ -21,29 +27,105 @@ public class TokensJwtUtil implements CommandLineRunner {
     private static final String ISSUER = "mx.com.qtx";
     private static final String SECRET = UUID.randomUUID().toString();
     private static final long EXPIRATION_TIME = 86400000; // 24 horas
+    private static final long EXPIRATION_TIME_TEST = 100; // 100 milisegundos
 
-    public static String generarToken(String username) {
+    public static String generarToken(String username, long tiempoExpiracion) {
 
-        Key llave = Keys.hmacShaKeyFor(SECRET.getBytes());
-        //secretKeyFor(SignatureAlgorithm.HS512);
+        SecretKey llave = getLlave();
+        // secretKeyFor(SignatureAlgorithm.HS512);
 
         return Jwts.builder()
                 .issuer(ISSUER)
                 .subject(username)
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME)).
+                .expiration(new Date(System.currentTimeMillis() + tiempoExpiracion))
                 .signWith(llave)
                 .compact();
     }
 
+    private static SecretKey getLlave() {
+        SecretKey llave = Keys.hmacShaKeyFor(SECRET.getBytes());
+        return llave;
+    }
+
     @Override
     public void run(String... args) throws Exception {
-        String token = generarToken("alex");
+        String token = generarToken("alex", EXPIRATION_TIME);
         log.info("Token: " + token);
 
+        SecretKey llave = getLlave();
+
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("usuario", "humberto");
+        claims.put("role", "ADMIN");
+
+        try {
+            String token2 = getTokenConClaims("beto", claims, llave, EXPIRATION_TIME);
+            log.info("Token2: " + token2);
+
+            // Thread.sleep(EXPIRATION_TIME_TEST + 100);
+
+            Jws<Claims> jwsClaims = extraerJwsClaimsTokenFirmado(token2, llave);
+            log.info("JwsClaims: " + jwsClaims);
+
+            log.info("Contenido Token: " + extraerContenidoTokenFirmadoStr(token2, llave));
+
+            log.info("Usuario Token: " + extraerUsuarioTokenFirmado(token2, llave));
+            log.info("Expiracion Token: " + extraerExpiracionTokenFirmado(token2, llave));
+            log.info("Rol Token: " + extraerCampoString(token2, llave, "role"));
+            log.info("Usuario Token: " + extraerCampoString(token2, llave, "usuario"));
+
+        } catch (ExpiredJwtException e) {
+            log.error("Error al generar o extraer token: " + e.getMessage());
+        } catch (Exception e) {
+            log.error("Error al generar o extraer token: " + e.getMessage());
+        }
+
+    }
+
+    private String getTokenConClaims(String username, Map<String, Object> claims, Key llave, long tiempoExpiracion) {
         Claims declaraciones = Jwts.claims()
-                                    .putAll(Map.of("usuario","humberto","role", "ADMIN" ))
-                                    .build();
+                .add(claims)
+                .build();
+
+        String token2 = Jwts.builder()
+                .issuer(ISSUER)
+                .subject(username)
+                .issuedAt(new Date(System.currentTimeMillis()))
+                .expiration(new Date(System.currentTimeMillis() + tiempoExpiracion))
+                .claims(declaraciones)
+                .signWith(llave)
+                .compact();
+        return token2;
+    }
+
+    private Jws<Claims> extraerJwsClaimsTokenFirmado(String tokenFirmado, SecretKey skLlave) {
+        Jws<Claims> jwsClaims = Jwts.parser().verifyWith(skLlave)
+                .build()
+                .parseSignedClaims(tokenFirmado);
+        return jwsClaims;
+    }
+
+    public String extraerContenidoTokenFirmadoStr(String tokenFirmado, SecretKey skLlave) {
+        Jws<Claims> jws = this.extraerJwsClaimsTokenFirmado(tokenFirmado, skLlave);
+        return jws.getHeader() + " " + jws.getPayload() + " "
+                + io.jsonwebtoken.io.Encoders.BASE64URL.encode(jws.getDigest());
+    }
+
+    public String extraerUsuarioTokenFirmado(String token, SecretKey skLlave) {
+        Jws<Claims> contenido = this.extraerJwsClaimsTokenFirmado(token, skLlave);
+        return contenido.getPayload().getSubject();
+    }
+
+    public Date extraerExpiracionTokenFirmado(String token, SecretKey skLlave) {
+        Jws<Claims> contenido = this.extraerJwsClaimsTokenFirmado(token, skLlave);
+        return contenido.getPayload().getExpiration();
+    }
+
+    public String extraerCampoString(String tokenFirmado, SecretKey skLlave, String llaveCampo) {
+        Jws<Claims> contenido = this.extraerJwsClaimsTokenFirmado(tokenFirmado, skLlave);
+        Claims claims = contenido.getPayload();
+        return (String) claims.get(llaveCampo);
     }
 
 }
