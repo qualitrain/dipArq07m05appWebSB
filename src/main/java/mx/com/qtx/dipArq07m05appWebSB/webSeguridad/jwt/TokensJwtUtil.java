@@ -1,4 +1,4 @@
-package mx.com.qtx.dipArq07m05appWebSB.webSeguridad.util.jwt;
+package mx.com.qtx.dipArq07m05appWebSB.webSeguridad.jwt;
 
 import java.security.Key;
 import java.util.Date;
@@ -9,19 +9,18 @@ import javax.crypto.SecretKey;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import java.util.Map;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import mx.com.qtx.dipArq07m05appWebSB.webSeguridad.servicios.IGeneradorTokensJWT;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jws;
-import io.jsonwebtoken.JwtBuilder;
 
 @Component
-public class TokensJwtUtil implements CommandLineRunner {
+public class TokensJwtUtil implements IGeneradorTokensJWT {
     private static final Logger log = LoggerFactory.getLogger(TokensJwtUtil.class);
 
     private static final String ISSUER = "mx.com.qtx";
@@ -48,7 +47,7 @@ public class TokensJwtUtil implements CommandLineRunner {
         return llave;
     }
 
-    @Override
+    // @Override
     public void run(String... args) throws Exception {
         String token = generarToken("alex", EXPIRATION_TIME);
         log.info("Token: " + token);
@@ -126,6 +125,60 @@ public class TokensJwtUtil implements CommandLineRunner {
         Jws<Claims> contenido = this.extraerJwsClaimsTokenFirmado(tokenFirmado, skLlave);
         Claims claims = contenido.getPayload();
         return (String) claims.get(llaveCampo);
+    }
+
+    @Override
+    public String generarToken(String nombreUsuario) {
+        return generarToken(nombreUsuario, EXPIRATION_TIME);
+    }
+
+    @Override
+    public String generarToken(String nombreUsuario, Map<String, Object> mapClaims) {
+        return generarToken(nombreUsuario, mapClaims, EXPIRATION_TIME);
+    }
+
+    @Override
+    public String generarToken(String nombreUsuario, Map<String, Object> mapClaims, long milisDuracion) {
+        if (mapClaims == null) {
+            mapClaims = new HashMap<>();
+        }
+        return getTokenConClaims(nombreUsuario, mapClaims, getLlave(), milisDuracion);
+    }
+
+    @Override
+    public String extraerUsuario(String token) {
+        try {
+            return extraerUsuarioTokenFirmado(token, getLlave());
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @Override
+    public boolean tokenExpirado(String token) {
+        try {
+            Date expiracion = extraerExpiracionTokenFirmado(token, getLlave());
+            return expiracion.before(new Date());
+        } catch (ExpiredJwtException e) {
+            return true;
+        } catch (Exception e) {
+            return true; // Ante cualquier error que impida extraer la expiración asumimos true/inválido
+        }
+    }
+
+    @Override
+    public boolean tokenValido(String tokenFirmado, String nombreUsuario) {
+        try {
+            String usuario = extraerUsuarioTokenFirmado(tokenFirmado, getLlave());
+            return usuario.equals(nombreUsuario) && !tokenExpirado(tokenFirmado);
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @Override
+    public String getLlaveBase64() {
+        return java.util.Base64.getEncoder().encodeToString(getLlave().getEncoded());
     }
 
 }
