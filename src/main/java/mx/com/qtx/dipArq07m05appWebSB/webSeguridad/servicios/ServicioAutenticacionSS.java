@@ -18,6 +18,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import mx.com.qtx.dipArq07m05appWebSB.webSeguridad.core.IResultadoOperacion;
 import mx.com.qtx.dipArq07m05appWebSB.webSeguridad.core.IServicioAutenticacionJWT;
 import mx.com.qtx.dipArq07m05appWebSB.webSeguridad.entidades.Autenticacion;
+import mx.com.qtx.dipArq07m05appWebSB.webSeguridad.entidades.TokenJWT;
 
 @Service
 public class ServicioAutenticacionSS implements IServicioAutenticacionJWT {
@@ -48,7 +49,7 @@ public class ServicioAutenticacionSS implements IServicioAutenticacionJWT {
 
             String token = generadorTokensJWT.generarToken(aut.getNombreUsuario(), mapClaims);
 
-            resultadoAutenticacion.setObjResultadoOk(token);
+            resultadoAutenticacion.setObjResultadoOk(new TokenJWT(token));
 
         } catch (DisabledException dex) {
             // Cuenta deshabilitada

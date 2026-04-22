@@ -56,6 +56,7 @@ public class ConfiguracionSeguridad {
         http
                 .authorizeHttpRequests(auth -> auth
                         // Paginas PUBLICAS
+                        .requestMatchers("/autenticar").permitAll()
                         .requestMatchers("/MenuCategorias.html", "/", "/categoria/**").permitAll()
                         .requestMatchers("/css/**", "/images/**").permitAll()
                         // Paginas PRIVADAS
@@ -63,6 +64,7 @@ public class ConfiguracionSeguridad {
                         .requestMatchers("/monitoreo/**").hasRole("ADMIN")
                         .requestMatchers("/api/v1/**", "/v3/**", "/swagger-ui/**").hasRole("AGENTE")
                         .anyRequest().authenticated())
+                .csrf(csrf -> csrf.ignoringRequestMatchers("/autenticar"))
                 .httpBasic(Customizer.withDefaults())
                 .formLogin(Customizer.withDefaults())
                 .addFilterAfter(new FiltroMonitoreoWeb(servicioMonitoreo),
