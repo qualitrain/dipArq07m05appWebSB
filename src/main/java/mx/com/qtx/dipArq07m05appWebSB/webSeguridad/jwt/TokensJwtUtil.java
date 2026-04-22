@@ -34,6 +34,7 @@ public class TokensJwtUtil implements IGeneradorTokensJWT {
         // secretKeyFor(SignatureAlgorithm.HS512);
 
         return Jwts.builder()
+                .id(UUID.randomUUID().toString())
                 .issuer(ISSUER)
                 .subject(username)
                 .issuedAt(new Date(System.currentTimeMillis()))
