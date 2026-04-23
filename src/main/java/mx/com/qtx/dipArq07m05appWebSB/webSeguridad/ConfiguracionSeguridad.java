@@ -10,6 +10,7 @@ import org.springframework.boot.jdbc.autoconfigure.DataSourceProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -19,8 +20,11 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import mx.com.qtx.dipArq07m05appWebSB.webSeguridad.core.IExtractorTokenJwtPeticionHttp;
+import mx.com.qtx.dipArq07m05appWebSB.webSeguridad.webapi.FiltroTokensJwt_SS;
 
 import mx.com.qtx.dipArq07m05appWebSB.web.monitoreo.FiltroMonitoreoWeb;
 import mx.com.qtx.dipArq07m05appWebSB.web.monitoreo.ServicioMonitoreo;
@@ -52,7 +56,9 @@ public class ConfiguracionSeguridad {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http,
+            IExtractorTokenJwtPeticionHttp extractorTokenJwtPeticionHttp,
+            UserDetailsService userDetailsService) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
                         // Paginas PUBLICAS
@@ -62,13 +68,16 @@ public class ConfiguracionSeguridad {
                         // Paginas PRIVADAS
                         .requestMatchers("/carrito/**").hasAnyRole("CLIENTE", "ADMIN")
                         .requestMatchers("/monitoreo/**").hasRole("ADMIN")
-                        .requestMatchers("/api/v1/**", "/v3/**", "/swagger-ui/**").hasRole("AGENTE")
+                        .requestMatchers("/api/v1/**", "/v3/**", "/swagger-ui/**").hasRole("LOGISTICA")
+                        // .requestMatchers("/api/v1/**", "/v3/**", "/swagger-ui/**").hasRole("AGENTE")
                         .anyRequest().authenticated())
                 .csrf(csrf -> csrf.ignoringRequestMatchers("/autenticar"))
                 .httpBasic(Customizer.withDefaults())
                 .formLogin(Customizer.withDefaults())
                 .addFilterAfter(new FiltroMonitoreoWeb(servicioMonitoreo),
-                        SecurityContextHolderAwareRequestFilter.class);
+                        SecurityContextHolderAwareRequestFilter.class)
+                .addFilterAfter(new FiltroTokensJwt_SS(extractorTokenJwtPeticionHttp, userDetailsService),
+                        UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }

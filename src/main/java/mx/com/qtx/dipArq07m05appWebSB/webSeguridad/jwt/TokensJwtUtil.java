@@ -27,10 +27,10 @@ public class TokensJwtUtil implements IGeneradorTokensJWT {
     private static final String SECRET = UUID.randomUUID().toString();
     private static final long EXPIRATION_TIME = 86400000; // 24 horas
     private static final long EXPIRATION_TIME_TEST = 100; // 100 milisegundos
+    private static SecretKey llave = getLlave();
 
     public static String generarToken(String username, long tiempoExpiracion) {
 
-        SecretKey llave = getLlave();
         // secretKeyFor(SignatureAlgorithm.HS512);
 
         return Jwts.builder()
@@ -158,7 +158,7 @@ public class TokensJwtUtil implements IGeneradorTokensJWT {
     @Override
     public boolean tokenExpirado(String token) {
         try {
-            Date expiracion = extraerExpiracionTokenFirmado(token, getLlave());
+            Date expiracion = extraerExpiracionTokenFirmado(token, llave);
             return expiracion.before(new Date());
         } catch (ExpiredJwtException e) {
             return true;
@@ -170,7 +170,7 @@ public class TokensJwtUtil implements IGeneradorTokensJWT {
     @Override
     public boolean tokenValido(String tokenFirmado, String nombreUsuario) {
         try {
-            String usuario = extraerUsuarioTokenFirmado(tokenFirmado, getLlave());
+            String usuario = extraerUsuarioTokenFirmado(tokenFirmado, llave);
             return usuario.equals(nombreUsuario) && !tokenExpirado(tokenFirmado);
         } catch (Exception e) {
             return false;
@@ -179,7 +179,7 @@ public class TokensJwtUtil implements IGeneradorTokensJWT {
 
     @Override
     public String getLlaveBase64() {
-        return java.util.Base64.getEncoder().encodeToString(getLlave().getEncoded());
+        return java.util.Base64.getEncoder().encodeToString(llave.getEncoded());
     }
 
 }
